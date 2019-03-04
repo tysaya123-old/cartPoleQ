@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import time
 
-n = 100000
+n = 10000
 tt = 200
 yi = []
 yf = []
@@ -13,6 +13,7 @@ l = 0
 env = gym.make('CartPole-v0')
 learner = betterCart()
 for i_episode in range(n):
+	print(i_episode + 1)
 	observation = env.reset()
 	if 0:#i_episode % 100 == 0:
 		for t in range(tt):
@@ -39,7 +40,7 @@ for i_episode in x:
 	observation = env.reset()
 	t=0
 	for t in range(tt):
-		env.render()
+		#env.render()
 		action = env.action_space.sample()
 		observation, reward, done, info = env.step(action)
 		if done:
@@ -52,8 +53,8 @@ for i_episode in x:
 	observation = env.reset()
 	t=0
 	for t in range(tt):
-		env.render()
-		action = learner.nextAction(initialState)
+		#env.render()
+		action = learner.bestMove(observation)
 		if action == 0:
 			l+=1
 		else:
